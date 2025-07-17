@@ -87,21 +87,25 @@ STAMPede uses a number of technologies to work properly:
 ## Application Snapshots
 
 ### Home Page
-<img width="1365" height="628" alt="image" src="https://github.com/user-attachments/assets/23f2770b-621d-41d7-8b6b-da81fdb47e7e" />
+<img width="1365" height="716" alt="image" src="https://github.com/user-attachments/assets/6852c897-52b1-4173-be92-d85207858a0c" />
 
 ### Home: Stamp Created
-<img width="1365" height="628" alt="image" src="https://github.com/user-attachments/assets/e491cb1e-f7ff-4be6-bfa3-b674c2cbaeba" />
+<img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/510b85e2-711d-4681-82e4-2a1fdc6cf612" />
 
 ### Home: Stamp Updated
-<img width="1365" height="626" alt="image" src="https://github.com/user-attachments/assets/47b73aaf-d461-4381-b3ee-75c5bbcad04a" />
+<img width="1365" height="718" alt="image" src="https://github.com/user-attachments/assets/392ea3c8-cd6a-4208-a905-ea9cef4faecc" />
+
+### Home: Stamp Delete
+<img width="1365" height="719" alt="image" src="https://github.com/user-attachments/assets/06261153-81fb-4455-8d57-d2316772fc37" />
+<img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/3928b2f7-dc83-4218-9212-2972a7a61e2e" />
 
 ### Create Page
-<img width="1365" height="627" alt="image" src="https://github.com/user-attachments/assets/0dc98dce-13a2-40ba-8049-cf6e4fa008cc" />
-<img width="1365" height="626" alt="image" src="https://github.com/user-attachments/assets/99f68a6e-9c72-47d2-a01d-d49f78633284" />
+<img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/89ac724a-9741-4001-b080-6895d16e5849" />
+<img width="1365" height="716" alt="image" src="https://github.com/user-attachments/assets/f85e24e6-3ea6-421d-b877-1686ab588a83" />
 
 ### Update Page
-<img width="1365" height="629" alt="image" src="https://github.com/user-attachments/assets/d6846576-8fd3-4381-9dfe-667c70c09aca" />
-<img width="1365" height="627" alt="image" src="https://github.com/user-attachments/assets/f7a61ca8-dad8-4ea2-a43f-4bc818f05c19" />
+<img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/e44432c9-da82-4633-8300-db0f63bb5175" />
+<img width="1365" height="715" alt="image" src="https://github.com/user-attachments/assets/7ddbfafd-d7e1-4791-9e30-6bc3350192fd" />
 
 <!-- FOLDER STRUCTURE -->
 ## Folder Structure
