@@ -27,7 +27,7 @@ COPYRIGHT: © 2025 ITD. All rights reserved.
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <!-- Form Section -->
         <div class="flex-1 p-4 border-2 bg-dost-light border-dost-dark">
-            <form method="POST" action="{{ route('update-stamp', $stamp->stp_id) }}">
+            <form id="edit-stamp-form" method="POST" action="{{ route('update-stamp', $stamp->stp_id) }}">
                 @csrf
                 
                 <div class="mb-2">
@@ -159,7 +159,7 @@ COPYRIGHT: © 2025 ITD. All rights reserved.
                         class="px-6 py-2 transition text-dost-dark hover:text-dost-blue">
                         Cancel
                     </a>
-                    <button type="submit" 
+                    <button id="submit-btn" type="submit" 
                         class="px-6 py-2 transition border-2 text-dots-blue bg-dost-light border-dost-blue text-dost-blue hover:bg-dost-blue hover:text-dost-light">
                         Update Stamp
                     </button>
@@ -285,6 +285,19 @@ COPYRIGHT: © 2025 ITD. All rights reserved.
         // Initialize preview with current stamp color
         updatePreviewColor('{{ $stamp->stp_color }}');
         updateCharCount();
+
+        const form = document.getElementById('edit-stamp-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const cancelBtn = document.querySelector('a[href="{{ route('wall') }}"]');
+
+        form.addEventListener('submit', function() {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            
+            if (cancelBtn) {
+                cancelBtn.classList.add('pointer-events-none', 'opacity-50');
+            }
+        });
     });
 </script>
 @endsection
