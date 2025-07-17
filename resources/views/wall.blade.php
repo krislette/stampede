@@ -44,7 +44,7 @@
     <div class="max-w-full">
         <div id="stamps-container" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             @foreach($arrStamps as $stamp)
-                @include('partials.stamp-card', ['stamp' => $stamp])
+                @include('partials.stamp_card', ['stamp' => $stamp])
             @endforeach
         </div>
 

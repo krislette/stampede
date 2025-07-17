@@ -23,7 +23,7 @@ class StampController extends Controller
      */
     public function showCreateForm()
     {
-        return view('create-stamp');
+        return view('create_stamp');
     }
 
     /**
@@ -64,7 +64,7 @@ class StampController extends Controller
     {
         $stamp = Stamp::findOrFail($intStampId);
 
-        return view('edit-stamp', compact('stamp'));
+        return view('edit_stamp', compact('stamp'));
     }
 
     /**
