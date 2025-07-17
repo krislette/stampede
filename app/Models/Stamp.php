@@ -1,7 +1,7 @@
 <?php
 /* ======================================================================
 SYSTEM NAME: STAMPede
-PURPOSE: Controller for stamp creation, display, and management
+PURPOSE: Model structure for a stamp
 PROGRAMMER: Acelle Krislette L. Rosales
 COPYRIGHT: © 2025 ITD. All rights reserved.
 ====================================================================== */
