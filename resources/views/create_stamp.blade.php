@@ -5,7 +5,7 @@
 @section('content')
 <div class="max-w-4xl mx-auto">
     <div class="mb-6 text-center">
-        <h2 class="mb-1 text-3xl font-bold text-dost-dark">CREATE STAMP</h2>
+        <h2 class="mb-1 text-3xl font-bold text-dost-dark">CREATE <span class="text-dost-blue">STAMP</span></h2>
         <p class="text-gray-600">Write it. Post it. Let the people see it.</p>
     </div>
 
