@@ -35,7 +35,7 @@ class StampController extends Controller
             'stp_to' => 'required|string|max:100',
             'stp_from' => 'required|string|max:100',
             'stp_message' => 'required|string',
-            'stp_color' => 'required|string|in:blue,gray,white',
+            'stp_color' => 'required|string|in:sunrays,lime,blaze,hotpink,skyblue,white',
         ]);
 
         if ($validator->fails()) {
@@ -83,7 +83,7 @@ class StampController extends Controller
             'stp_to' => 'required|string|max:100',
             'stp_from' => 'required|string|max:100',
             'stp_message' => 'required|string',
-            'stp_color' => 'required|string|in:blue,gray,white',
+            'stp_color' => 'required|string|in:sunrays,lime,blaze,hotpink,skyblue,white',
         ]);
 
         if ($validator->fails()) {
