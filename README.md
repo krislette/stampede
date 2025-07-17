@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/yourusername/stampede">
+  <a href="https://github.com/krislette/stampede">
     <img src="public/favicon.ico" alt="Logo" width="80" height="80">
   </a>
 
@@ -13,9 +13,9 @@
     <br />
     <a href="#demo">View Demo</a>
     ·
-    <a href="https://github.com/yourusername/stampede/issues">Report Bug</a>
+    <a href="https://github.com/krislette/stampede/issues">Report Bug</a>
     ·
-    <a href="https://github.com/yourusername/stampede/pulls">Request Feature</a>
+    <a href="https://github.com/krislette/stampede/pulls">Request Feature</a>
   </p>
 </div>
 
