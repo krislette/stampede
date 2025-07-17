@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Stamp extends Model
 {
     use HasFactory;
 
     protected $table = 'tbl_stamps';
+
     protected $primaryKey = 'stp_id';
 
     protected $fillable = [
@@ -17,7 +18,7 @@ class Stamp extends Model
         'stp_from',
         'stp_message',
         'stp_color',
-        'stp_edit_code'
+        'stp_edit_code',
     ];
 
     /**

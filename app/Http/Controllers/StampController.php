@@ -14,6 +14,7 @@ class StampController extends Controller
     public function showWall()
     {
         $arrStamps = Stamp::getStampsForWall(10);
+
         return view('wall', compact('arrStamps'));
     }
 
@@ -34,7 +35,7 @@ class StampController extends Controller
             'stp_to' => 'required|string|max:100',
             'stp_from' => 'required|string|max:100',
             'stp_message' => 'required|string',
-            'stp_color' => 'required|string|in:blue,gray,white'
+            'stp_color' => 'required|string|in:blue,gray,white',
         ]);
 
         if ($validator->fails()) {
@@ -43,7 +44,7 @@ class StampController extends Controller
                 ->withInput();
         }
 
-        $stamp = new Stamp();
+        $stamp = new Stamp;
         $stamp->stp_to = $request->stp_to;
         $stamp->stp_from = $request->stp_from;
         $stamp->stp_message = $request->stp_message;
@@ -62,6 +63,7 @@ class StampController extends Controller
     public function showEditForm($intStampId)
     {
         $stamp = Stamp::findOrFail($intStampId);
+
         return view('edit-stamp', compact('stamp'));
     }
 
@@ -81,7 +83,7 @@ class StampController extends Controller
             'stp_to' => 'required|string|max:100',
             'stp_from' => 'required|string|max:100',
             'stp_message' => 'required|string',
-            'stp_color' => 'required|string|in:blue,gray,white'
+            'stp_color' => 'required|string|in:blue,gray,white',
         ]);
 
         if ($validator->fails()) {
@@ -112,6 +114,7 @@ class StampController extends Controller
         }
 
         $stamp->delete();
+
         return redirect('/')->with('success', 'Stamp deleted successfully!');
     }
 
@@ -125,7 +128,7 @@ class StampController extends Controller
 
         return response()->json([
             'stamps' => $arrStamps->items(),
-            'has_more' => $arrStamps->hasMorePages()
+            'has_more' => $arrStamps->hasMorePages(),
         ]);
     }
 }

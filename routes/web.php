@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StampController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [StampController::class, 'showWall'])->name('wall');
 Route::get('/create-stamp', [StampController::class, 'showCreateForm'])->name('create-stamp');
