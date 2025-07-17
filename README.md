@@ -40,7 +40,7 @@
     </ul>
   </li>
   <li>
-    <a href="#application-snapshots">Application Snapshots</a>
+    <a href="#web-snapshots">Web Snapshots</a>
   </li>
   <li>
     <a href="#folder-structure">Folder Structure</a>
@@ -83,8 +83,8 @@ STAMPede uses a number of technologies to work properly:
 - [Composer](https://getcomposer.org/) - PHP Dependency Manager
 - [Node.js](https://nodejs.org/) - JavaScript Runtime
 
-<!-- APPLICATION SNAPSHOTS -->
-## Application Snapshots
+<!-- WEB SNAPSHOTS -->
+## Web Snapshots
 
 ### Home Page
 <img width="1365" height="716" alt="image" src="https://github.com/user-attachments/assets/6852c897-52b1-4173-be92-d85207858a0c" />
@@ -101,7 +101,7 @@ STAMPede uses a number of technologies to work properly:
 
 ### Create Page
 <img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/89ac724a-9741-4001-b080-6895d16e5849" />
-<img width="1365" height="716" alt="image" src="https://github.com/user-attachments/assets/f85e24e6-3ea6-421d-b877-1686ab588a83" />
+<img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/bbe4adf8-ac53-4dd4-9636-b6f16155ee7a" />
 
 ### Update Page
 <img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/e44432c9-da82-4633-8300-db0f63bb5175" />
