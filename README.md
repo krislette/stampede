@@ -1,61 +1,222 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<a id="readme-top"></a>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/yourusername/stampede">
+    <img src="public/favicon.ico" alt="Logo" width="80" height="80">
+  </a>
 
-## About Laravel
+  <h1 align="center">STAMPede</h1>
+  <p align="center">
+    A Public Digital Whiteboard for Sharing Thoughts
+    <br />
+    <a href="#demo">View Demo</a>
+    ·
+    <a href="https://github.com/yourusername/stampede/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/yourusername/stampede/pulls">Request Feature</a>
+  </p>
+</div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> STAMPede is a modern web application built with Laravel, Vite, and Tailwind CSS.
+> My personal goal for this mini project for DOST is to create a public whiteboard
+> where people can send their thoughts to other people. Everyone is free to input anything.
+> Of course, there's the challenge of profanity, bad inputs, and all, and I aim to
+> solve them on future versions of the application. Right now, I am most proud of its current state.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<!-- TABLE OF CONTENTS -->
+### Table Of Contents
+<ol>
+  <li>
+    <a href="#about-the-project">About The Project</a>
+    <ul>
+      <li><a href="#table-of-contents">Table Of Contents</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#technologies-used">Technologies Used</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#application-snapshots">Application Snapshots</a>
+  </li>
+  <li>
+    <a href="#folder-structure">Folder Structure</a>
+  </li>
+  <li>
+    <a href="#installation">Installation</a>
+    <ul>
+      <li><a href="#prerequisites">Prerequisites</a></li>
+      <li><a href="#cloning-the-repository">Cloning the Repository</a></li>
+      <li><a href="#environment-setup">Environment Setup</a></li>
+      <li><a href="#database-setup">Database Setup</a></li>
+    </ul>
+  </li>
+  <li>
+    <a href="#run">Run</a>
+  </li>
+  <li>
+    <a href="#license">License</a>
+  </li>
+</ol> 
 
-## Learning Laravel
+### Features
+- **Public Whiteboard**: Anonymous thought sharing platform
+- **Real-time Posting**: Instant message display for community interaction
+- **Modern Frontend**: Fast and smooth interactions
+- **Laravel MVC Architecture**: Clean, maintainable code structure
+- **Blade Templating**: Dynamic and reusable UI components
+- **User-friendly Interface**: Simple and intuitive design for easy participation
+- **Community-driven**: Open platform for diverse thoughts and perspectives
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+*Future enhancements will include content moderation and filtering systems.*
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Technologies Used
+STAMPede uses a number of technologies to work properly:
+- [Laravel](https://laravel.com/) - PHP Framework
+- [Vite](https://vitejs.dev/) - Build Tool
+- [Tailwind CSS](https://tailwindcss.com/) - CSS Framework
+- [Blade](https://laravel.com/docs/blade) - Templating Engine
+- [PostgreSQL](https://www.postgresql.org/) - Database via Supabase
+- [Composer](https://getcomposer.org/) - PHP Dependency Manager
+- [Node.js](https://nodejs.org/) - JavaScript Runtime
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+<!-- APPLICATION SNAPSHOTS -->
+## Application Snapshots
 
-## Laravel Sponsors
+### Home Page
+<img width="1365" height="628" alt="image" src="https://github.com/user-attachments/assets/23f2770b-621d-41d7-8b6b-da81fdb47e7e" />
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Home: Stamp Created
+<img width="1365" height="628" alt="image" src="https://github.com/user-attachments/assets/e491cb1e-f7ff-4be6-bfa3-b674c2cbaeba" />
 
-### Premium Partners
+### Home: Stamp Updated
+<img width="1365" height="626" alt="image" src="https://github.com/user-attachments/assets/47b73aaf-d461-4381-b3ee-75c5bbcad04a" />
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Create Page
+<img width="1365" height="627" alt="image" src="https://github.com/user-attachments/assets/0dc98dce-13a2-40ba-8049-cf6e4fa008cc" />
+<img width="1365" height="626" alt="image" src="https://github.com/user-attachments/assets/99f68a6e-9c72-47d2-a01d-d49f78633284" />
 
-## Contributing
+### Update Page
+<img width="1365" height="629" alt="image" src="https://github.com/user-attachments/assets/d6846576-8fd3-4381-9dfe-667c70c09aca" />
+<img width="1365" height="627" alt="image" src="https://github.com/user-attachments/assets/f7a61ca8-dad8-4ea2-a43f-4bc818f05c19" />
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+<!-- FOLDER STRUCTURE -->
+## Folder Structure
 
-## Code of Conduct
+    app/
+    ├── Http/
+    │   ├── Controllers/          # Application controllers
+    │   └── Middleware/           # Custom middleware
+    ├── Models/                   # Eloquent models
+    └── Providers/                # Service providers
+    
+    resources/
+    ├── css/                      # Tailwind CSS files
+    ├── js/                       # JavaScript files
+    └── views/                    # Blade templates
+    
+    public/
+    ├── images/                   # Static images
+    └── build/                    # Compiled assets (generated by Vite)
+    
+    routes/
+    └── web.php                   # Web routes
+    
+    database/
+    ├── migrations/               # Database migrations
+    └── seeders/                  # Database seeders
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<!-- INSTALLATION -->
+## Installation
 
-## Security Vulnerabilities
+### Prerequisites
+- **PHP** (version 8.1 or higher)
+- **Composer** - PHP dependency manager
+- **Node.js** (version 16 or higher)
+- **npm** or **yarn** - Package manager
+- **PostgreSQL (via Supabase)**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Cloning the Repository
+
+1. Fork this repository.
+
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/stampede.git
+   cd stampede
+   ```
+
+### Environment Setup
+
+1. Install PHP dependencies:
+   ```bash
+   composer install
+   ```
+
+2. Install JavaScript dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Copy the environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Generate application key:
+   ```bash
+   php artisan key:generate
+   ```
+
+5. Configure your `.env` file with your database credentials:
+   ```env
+   DB_CONNECTION=pgsql
+   DB_HOST=db.postgrehostfromsupabase.supabase.co # I used supabase that's why host looks like this
+   DB_PORT=5432
+   DB_DATABASE=postgres
+   DB_USERNAME=postgres
+   DB_PASSWORD=your_password
+   ```
+
+### Database Setup
+
+1. Your PostgreSQL database is already created on Supabase. Make sure your connection details in .env are correct.
+
+2. Run migrations:
+   ```bash
+   php artisan migrate
+   ```
+
+3. (Optional) Run seeders if you have sample data (I didn't create one on mine pls I don't have time):
+   ```bash
+   php artisan db:seed
+   ```
+
+<!-- RUN -->
+## Run
+
+1. Start the Laravel development server:
+   ```bash
+   php artisan serve
+   ```
+
+2. In a new terminal, start the Vite development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Visit `http://localhost:8000` in your browser.
+
+### Building for Production
+
+I can't even build for prod myself... I'm so disappointed
+
+<!-- Add more contributors as needed -->
 
 ## License
+Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. See [LICENSE](LICENSE) for more information.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<p align="right">[<a href="#readme-top">Back to top</a>]</p>
