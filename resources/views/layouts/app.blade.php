@@ -97,6 +97,11 @@
         </div>
     @endif
 
+    <!-- Global Toast Script -->
+    <div id="toast" class="fixed flex items-center gap-2 px-4 py-3 text-sm transition-opacity duration-300 opacity-0 z-[9999] bottom-5 right-5 border">
+        <span id="toast-message">Message</span>
+    </div>
+
     <script>
         // Mobile menu toggle
         document.addEventListener('DOMContentLoaded', function() {
@@ -116,6 +121,34 @@
                 });
             }
         });
+
+        // Global toast handler
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toast-message');
+
+            messageEl.textContent = message;
+
+            toast.classList.remove(
+                'bg-dost-blue', 'border-dost-blue',
+                'bg-dost-dark', 'border-dost-dark',
+                'text-dost-light', 'text-dost-blue'
+            );
+
+            if (isError) {
+                toast.classList.add('bg-dost-dark', 'border-dost-dark', 'text-dost-light');
+            } else {
+                toast.classList.add('bg-dost-blue', 'border-dost-blue', 'text-dost-light');
+            }
+
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
     </script>
 </body>
 </html>
