@@ -10,7 +10,7 @@
     };
 @endphp
 
-<div class="flex flex-col p-3 transition-transform duration-200 transform border-2 bg-dost-light h-80 border-dost-dark hover:scale-105">
+<div id="stamp-{{ $stamp->stp_id }}" class="flex flex-col p-3 transition-transform duration-200 transform border-2 bg-dost-light h-80 border-dost-dark hover:scale-105">
     <!-- Header with network logo and date -->
     <div class="flex items-center justify-between mb-3">
         <div class="flex items-center">
