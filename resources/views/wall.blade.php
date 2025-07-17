@@ -1,21 +1,29 @@
 @extends('layouts.app')
 
-@section('title', 'Wall - Stampede')
+@section('title', 'STAMPede')
 
 @if (session('success'))
-    <div class="mb-6 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded relative">
-        <strong>{{ session('success') }}</strong>
-        @if (session('edit_code'))
-            <div class="mt-2 text-sm">
-                Your stamp edit/delete code is:
-                <span class="font-mono bg-white border px-2 py-1 rounded select-all" id="editCode">
-                    {{ session('edit_code') }}
-                </span>
-                <button onclick="copyCode()" class="ml-2 text-blue-600 underline hover:text-blue-800">
-                    Copy
-                </button>
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="max-w-md p-6 font-mono bg-white rounded-lg w-mx-4">
+            <div class="mb-4 text-green-800">
+                <strong>{{ session('success') }}</strong>
             </div>
-        @endif
+            @if (session('edit_code'))
+                <div class="mb-4 text-sm">
+                    Your stamp edit/delete code is:
+                    <div class="px-2 py-1 mt-2 font-mono bg-gray-100 border rounded select-all" id="editCode">
+                        {{ session('edit_code') }}
+                    </div>
+                    <button onclick="copyCode()" class="px-4 py-2 mt-2 text-white bg-blue-600 rounded hover:bg-blue-700">
+                        Copy Code
+                    </button>
+                </div>
+            @endif
+            <button onclick="closeModal()" class="px-4 py-2 text-white bg-gray-600 rounded hover:bg-gray-700">
+                Close
+            </button>
+        </div>
     </div>
 
     <script>
@@ -25,34 +33,32 @@
                 .then(() => alert('Code copied!'))
                 .catch(() => alert('Failed to copy code.'));
         }
+        
+        function closeModal() {
+            document.getElementById('success-modal').style.display = 'none';
+        }
     </script>
 @endif
 
-
 @section('content')
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-8">
-            <h2 class="text-3xl font-bold text-dost-dark mb-2">Digital Bulletin Board</h2>
-            <p class="text-gray-600">Share your thoughts and connect with others</p>
-        </div>
-
-        <div id="stamps-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="max-w-full">
+        <div id="stamps-container" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
             @foreach($arrStamps as $stamp)
                 @include('partials.stamp-card', ['stamp' => $stamp])
             @endforeach
         </div>
 
         @if($arrStamps->hasMorePages())
-            <div class="text-center mt-8">
-                <button id="load-more-btn" class="bg-dost-blue text-white px-6 py-3 rounded hover:bg-blue-600 transition">
-                    Load More Stamps
+            <div class="mt-8 text-center">
+                <button id="load-more-btn" class="px-6 py-3 font-mono font-bold tracking-wide text-white transition border-2 rounded bg-dost-blue hover:bg-blue-600 border-dost-blue">
+                    LOAD MORE STAMPS
                 </button>
             </div>
         @endif
 
-        <div id="loading" class="hidden text-center mt-8">
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-dost-blue"></div>
-            <p class="mt-2 text-gray-600">Loading more stamps...</p>
+        <div id="loading" class="hidden mt-8 text-center">
+            <div class="inline-block w-8 h-8 border-b-2 rounded-full animate-spin border-dost-blue"></div>
+            <p class="mt-2 font-mono text-gray-600">Loading more stamps...</p>
         </div>
     </div>
 
@@ -104,29 +110,29 @@
                 const strDate = new Date(stamp.created_at).toLocaleDateString();
 
                 return `
-                                <div class="stamp-card ${strColorClass} rounded-lg shadow-md p-6 border-2 border-dost-dark transform hover:scale-105 transition-transform duration-200">
-                                    <div class="stamp-header mb-4">
-                                        <div class="text-sm font-semibold text-dost-dark">
-                                            To: ${stamp.stp_to}
-                                        </div>
-                                        <div class="text-sm text-gray-600">
-                                            From: ${stamp.stp_from}
-                                        </div>
-                                    </div>
+                    <div class="stamp-card ${strColorClass} rounded-lg shadow-md p-6 border-2 border-dost-dark transform hover:scale-105 transition-transform duration-200 font-mono">
+                        <div class="mb-4 stamp-header">
+                            <div class="text-sm font-bold tracking-wide text-dost-dark">
+                                TO: ${stamp.stp_to}
+                            </div>
+                            <div class="text-sm tracking-wide text-gray-600">
+                                FROM: ${stamp.stp_from}
+                            </div>
+                        </div>
 
-                                    <div class="stamp-message mb-4">
-                                        <p class="text-dost-dark leading-relaxed">${stamp.stp_message}</p>
-                                    </div>
+                        <div class="mb-4 stamp-message">
+                            <p class="leading-relaxed text-dost-dark">${stamp.stp_message}</p>
+                        </div>
 
-                                    <div class="stamp-footer flex justify-between items-center text-xs text-gray-500">
-                                        <span>${strDate}</span>
-                                        <div class="flex space-x-2">
-                                            <a href="/edit-stamp/${stamp.stp_id}" class="text-dost-blue hover:underline">Edit</a>
-                                            <button onclick="showDeleteModal(${stamp.stp_id})" class="text-red-500 hover:underline">Delete</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
+                        <div class="flex items-center justify-between text-xs text-gray-500 stamp-footer">
+                            <span class="tracking-wide">${strDate}</span>
+                            <div class="flex space-x-2">
+                                <a href="/edit-stamp/${stamp.stp_id}" class="font-bold tracking-wide text-dost-blue hover:underline">EDIT</a>
+                                <button onclick="showDeleteModal(${stamp.stp_id})" class="font-bold tracking-wide text-red-500 hover:underline">DELETE</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
             }
 
             function getColorClass(strColor) {
