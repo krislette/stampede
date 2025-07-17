@@ -1,4 +1,5 @@
 <?php
+
 /* ======================================================================
 SYSTEM NAME: STAMPede
 PURPOSE: Model structure for a stamp
@@ -30,7 +31,7 @@ class Stamp extends Model
     /**
      * Get stamps with pagination for infinite scroll
      *
-     * @param int $intPerPage
+     * @param  int  $intPerPage
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function getStampsForWall($intPerPage = 10)
