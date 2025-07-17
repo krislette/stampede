@@ -50,7 +50,7 @@
 
         @if($arrStamps->hasMorePages())
             <div class="mt-8 text-center">
-                <button id="load-more-btn" class="px-6 py-3 font-mono font-bold tracking-wide text-white transition border-2 rounded bg-dost-blue hover:bg-blue-600 border-dost-blue">
+                <button id="load-more-btn" class="px-6 py-3 text-lg font-bold tracking-wide transition border-2 text-dost-blue bg-dost-light hover:bg-dost-blue border-dost-blue hover:text-dost-light">
                     LOAD MORE STAMPS
                 </button>
             </div>
@@ -107,40 +107,63 @@
 
             function createStampHtml(stamp) {
                 const strColorClass = getColorClass(stamp.stp_color);
-                const strDate = new Date(stamp.created_at).toLocaleDateString();
+                const stampDate = new Date(stamp.created_at);
+                const strFormattedDate = `${String(stampDate.getMonth() + 1).padStart(2, '0')}/${String(stampDate.getDate()).padStart(2, '0')}`;
 
                 return `
-                    <div class="stamp-card ${strColorClass} rounded-lg shadow-md p-6 border-2 border-dost-dark transform hover:scale-105 transition-transform duration-200 font-mono">
-                        <div class="mb-4 stamp-header">
-                            <div class="text-sm font-bold tracking-wide text-dost-dark">
-                                TO: ${stamp.stp_to}
+                    <div class="flex flex-col p-4 transition-transform duration-200 transform bg-white border-2 shadow-md h-80 border-dost-dark hover:scale-105">
+                        <!-- Header with network logo and date -->
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="w-6 h-6 border-2 bg-dost-blue border-dost-dark">
+                                    <div class="flex items-center justify-center w-full h-full text-xs font-bold text-white">ST</div>
+                                </div>
+                                <span class="ml-2 text-xs font-bold text-dost-dark">STAMPede</span>
                             </div>
-                            <div class="text-sm tracking-wide text-gray-600">
-                                FROM: ${stamp.stp_from}
+                            <div class="text-xs text-dost-dark">${strFormattedDate}</div>
+                        </div>
+                        
+                        <!-- To and From -->
+                        <div class="mb-3">
+                            <div class="text-xs font-semibold text-dost-dark">
+                                To: <span>${stamp.stp_to}</span>
+                            </div>
+                            <div class="text-xs text-dost-dark">
+                                From: <span>${stamp.stp_from}</span>
                             </div>
                         </div>
-
-                        <div class="mb-4 stamp-message">
-                            <p class="leading-relaxed text-dost-dark">${stamp.stp_message}</p>
+                        
+                        <!-- Message Body -->
+                        <div class="flex-1 mb-3 overflow-hidden">
+                            <div class="h-full p-3 text-sm leading-relaxed break-words border-2 text-dost-dark ${strColorClass} overflow-y-auto">${stamp.stp_message}</div>
                         </div>
-
-                        <div class="flex items-center justify-between text-xs text-gray-500 stamp-footer">
-                            <span class="tracking-wide">${strDate}</span>
-                            <div class="flex space-x-2">
-                                <a href="/edit-stamp/${stamp.stp_id}" class="font-bold tracking-wide text-dost-blue hover:underline">EDIT</a>
-                                <button onclick="showDeleteModal(${stamp.stp_id})" class="font-bold tracking-wide text-red-500 hover:underline">DELETE</button>
-                            </div>
+                        
+                        <!-- Footer with Edit and Delete -->
+                        <div class="flex items-center justify-between text-xs">
+                            <a href="/edit-stamp/${stamp.stp_id}" class="cursor-pointer text-dost-blue hover:underline">Edit</a>
+                            <button onclick="showDeleteModal(${stamp.stp_id})" class="cursor-pointer text-dost-dark hover:underline">Delete</button>
                         </div>
                     </div>
                 `;
             }
 
-            function getColorClass(strColor) {
-                switch (strColor) {
-                    case 'blue': return 'bg-blue-100 border-blue-300';
-                    case 'gray': return 'bg-gray-100 border-gray-300';
-                    case 'white': return 'bg-white border-gray-300';
-                    default: return 'bg-white border-gray-300';
+            // Also update your getColorClass function to match the new colors:
+            function getColorClass(color) {
+                switch(color) {
+                    case 'sunrays':
+                        return 'bg-yellow-100 border-yellow-300';
+                    case 'lime':
+                        return 'bg-lime-100 border-lime-300';
+                    case 'blaze':
+                        return 'bg-orange-100 border-orange-300';
+                    case 'hotpink':
+                        return 'bg-pink-100 border-pink-300';
+                    case 'skyblue':
+                        return 'bg-sky-100 border-sky-300';
+                    case 'white':
+                        return 'bg-white border-gray-300';
+                    default:
+                        return 'bg-white border-gray-300';
                 }
             }
         });
