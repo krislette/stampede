@@ -46,11 +46,6 @@
     </script>
 @endif
 
-<!-- Toast Notification -->
-<div id="toast" class="fixed flex items-center gap-2 px-4 py-3 text-sm transition-opacity duration-300 opacity-0 z-[9999] bottom-5 right-5 border">
-    <span id="toast-message">Message</span>
-</div>
-
 <!-- Delete Modal -->
 <div id="delete-modal" class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-50">
     <div class="w-full max-w-md p-6 mx-4 font-mono bg-white border border-black">
@@ -93,30 +88,6 @@
     </div>
 
     <script>
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            const messageEl = document.getElementById('toast-message');
-
-            messageEl.textContent = message;
-
-            // Reset all classes
-            toast.classList.remove('bg-dost-blue', 'border-dost-blue', 'bg-dost-dark', 'border-dost-dark', 'text-dost-light', 'text-dost-blue');
-
-            if (isError) {
-                toast.classList.add('bg-dost-dark', 'border-dost-dark', 'text-dost-light');
-            } else {
-                toast.classList.add('bg-dost-blue', 'border-dost-blue', 'text-dost-light'); // or text-white
-            }
-
-            toast.classList.remove('opacity-0');
-            toast.classList.add('opacity-100');
-
-            setTimeout(() => {
-                toast.classList.remove('opacity-100');
-                toast.classList.add('opacity-0');
-            }, 3000);
-        }
-        
         document.addEventListener('DOMContentLoaded', function () {
             let intCurrentPage = 1;
             let currentDeleteId = null;
