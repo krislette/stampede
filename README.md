@@ -89,6 +89,12 @@ STAMPede uses a number of technologies to work properly:
 ### Home Page
 <img width="1365" height="716" alt="image" src="https://github.com/user-attachments/assets/28db8de1-b1b7-4a00-9f63-7118c58aaefa" />
 
+### Home: Lazy Loading
+<img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/f99e4a85-b416-46ad-9601-baceb8e77987" />
+
+### Home: Bottom
+<img width="1365" height="716" alt="image" src="https://github.com/user-attachments/assets/b6d5dba1-4457-4dc2-b8b7-2516849a2f5e" />
+
 ### Home: Stamp Created
 <img width="1365" height="717" alt="image" src="https://github.com/user-attachments/assets/510b85e2-711d-4681-82e4-2a1fdc6cf612" />
 
