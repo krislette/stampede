@@ -76,7 +76,7 @@ class StampController extends Controller
 
         // Simple verification - check if edit code matches
         if ($request->stp_edit_code !== $stamp->stp_edit_code) {
-            return redirect()->back()->with('error', 'Invalid edit code!');
+            return redirect()->back()->with('toast_error', 'Incorrect edit code.');
         }
 
         $validator = Validator::make($request->all(), [

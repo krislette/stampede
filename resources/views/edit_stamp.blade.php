@@ -2,6 +2,14 @@
 
 @section('title', 'STAMPede: Edit')
 
+@if(session('toast_error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            showToast(@json(session('toast_error')), true);
+        });
+    </script>
+@endif
+
 @section('content')
 <div class="max-w-4xl mx-auto">
     <div class="mb-6 text-center">
