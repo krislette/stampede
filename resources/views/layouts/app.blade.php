@@ -20,7 +20,7 @@
     @else
         <div class="flex min-h-screen">
             <!-- Left Section -->
-            <div class="fixed top-0 left-0 z-10 flex flex-col items-end w-[45%] h-screen px-4 py-12">
+            <div class="fixed top-0 left-0 z-10 flex flex-col items-end w-[35%] h-screen px-4 py-12">
                 <!-- Stampede Title -->
                 <div class="flex items-center justify-center flex-1 p-0 m-0">
                     <div class="origin-center transform rotate-90 translate-x-[7rem]">
@@ -48,15 +48,15 @@
                         WALL
                     </a>
                     <a href="{{ route('create-stamp') }}"
-                    class="bg-dost-white text-dost-blue px-6 py-3 text-lg font-bold tracking-wide hover:bg-dost-blue hover:text-dost-light transition-colors duration-200 border-2 border-dost-blue {{ request()->routeIs('create-stamp') ? 'bg-blue-600' : '' }}">
+                    class="bg-dost-light text-dost-blue px-6 py-3 text-lg font-bold tracking-wide hover:bg-dost-blue hover:text-dost-light transition-colors duration-200 border-2 border-dost-blue {{ request()->routeIs('create-stamp') ? 'bg-blue-600' : '' }}">
                         POST
                     </a>
                 </nav>
             </div>
 
             <!-- Right Content Area -->
-            <div class="ml-[45%] w-[55%] overflow-y-auto h-screen">
-                <main class="py-8 pl-4 pr-64">
+            <div class="ml-[35%] w-[65%] overflow-y-auto h-screen">
+                <main class="py-8 pl-4 pr-56">
                     @yield('content')
                 </main>
             </div>
