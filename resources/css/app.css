@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Nokia';
+  src: url('../fonts/nokia.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Scrollbar styles */
 ::-webkit-scrollbar {
   width: 5px;

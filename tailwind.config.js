@@ -11,6 +11,9 @@ export default {
         'dost-blue': '#00ACEC',
         'dost-dark': '#1F2937',
         'dost-light': '#FEFEFE',
+      },
+      fontFamily: {
+        'nokia': ['Nokia', 'monospace'],
       }
     },
   },
