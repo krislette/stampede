@@ -106,16 +106,25 @@ class StampController extends Controller
      */
     public function deleteStamp(Request $request, $intStampId)
     {
+        $request->validate([
+            'stp_edit_code' => 'required|string',
+        ]);
+
         $stamp = Stamp::findOrFail($intStampId);
 
-        // Simple verification - check if edit code matches
         if ($request->stp_edit_code !== $stamp->stp_edit_code) {
-            return redirect()->back()->with('error', 'Invalid edit code!');
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid delete code!'
+            ]);
         }
 
         $stamp->delete();
 
-        return redirect('/')->with('success', 'Stamp deleted successfully!');
+        return response()->json([
+            'success' => true,
+            'message' => 'Stamp deleted successfully!'
+        ]);
     }
 
     /**
