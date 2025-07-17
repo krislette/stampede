@@ -10,7 +10,7 @@ export default {
       colors: {
         'dost-blue': '#3B82F6',
         'dost-dark': '#1F2937',
-        'dost-light': '#F8FAFC',
+        'dost-light': '#FEFEFE',
       }
     },
   },
