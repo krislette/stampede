@@ -103,8 +103,8 @@
             }
 
             function loadMoreStamps() {
-                btnLoadMore.style.display = 'none';
-                divLoading.style.display = 'block';
+                btnLoadMore.classList.add('hidden');
+                divLoading.classList.remove('hidden');
 
                 fetch(`/load-more-stamps?page=${intCurrentPage}`)
                     .then(response => response.json())
@@ -117,12 +117,11 @@
                         }
 
                         if (data.has_more) {
-                            btnLoadMore.style.display = 'block';
+                            btnLoadMore.classList.remove('hidden');
                         } else {
-                            btnLoadMore.style.display = 'none';
+                            btnLoadMore.classList.add('hidden');
                         }
-
-                        divLoading.style.display = 'none';
+                        divLoading.classList.add('hidden');
                     })
                     .catch(error => {
                         console.error('Error loading stamps:', error);
