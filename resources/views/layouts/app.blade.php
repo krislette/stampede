@@ -12,7 +12,7 @@
 <body class="min-h-screen font-mono bg-dost-light">
     <div class="flex min-h-screen">
         <!-- Left Section -->
-        <div class="fixed top-0 left-0 z-10 flex flex-col items-end w-[45%] h-screen px-8 py-12">
+        <div class="fixed top-0 left-0 z-10 flex flex-col items-end w-[45%] h-screen px-4 py-12">
             <!-- Stampede Title -->
             <div class="flex items-center justify-center flex-1 p-0 m-0">
                 <div class="origin-center transform rotate-90 translate-x-[7rem]">
@@ -48,7 +48,7 @@
 
         <!-- Right Content Area -->
         <div class="ml-[45%] w-[55%] overflow-y-auto h-screen">
-            <main class="py-8 pl-8 pr-56">
+            <main class="py-8 pl-4 pr-64">
                 @yield('content')
             </main>
         </div>
