@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dost-blue': '#3B82F6',
+        'dost-blue': '#00ACEC',
         'dost-dark': '#1F2937',
         'dost-light': '#FEFEFE',
       }
