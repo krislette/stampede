@@ -1,4 +1,10 @@
 <?php
+/* ======================================================================
+SYSTEM NAME: STAMPede
+PURPOSE: Controller for stamp creation, display, and management
+PROGRAMMER: Acelle Krislette L. Rosales
+COPYRIGHT: © 2025 ITD. All rights reserved.
+====================================================================== */
 
 namespace App\Models;
 
@@ -23,6 +29,9 @@ class Stamp extends Model
 
     /**
      * Get stamps with pagination for infinite scroll
+     *
+     * @param int $intPerPage
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public static function getStampsForWall($intPerPage = 10)
     {
@@ -32,6 +41,8 @@ class Stamp extends Model
 
     /**
      * Generate random edit code
+     *
+     * @return string
      */
     public static function generateEditCode()
     {

@@ -1,4 +1,10 @@
 <?php
+/* ======================================================================
+SYSTEM NAME: STAMPede
+PURPOSE: Controller for stamp creation, display, and management
+PROGRAMMER: Acelle Krislette L. Rosales
+COPYRIGHT: © 2025 ITD. All rights reserved.
+====================================================================== */
 
 namespace App\Http\Controllers;
 
@@ -38,7 +44,8 @@ class StampController extends Controller
             'stp_color' => 'required|string|in:sunrays,lime,blaze,hotpink,skyblue,white',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails()) 
+        {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -74,19 +81,21 @@ class StampController extends Controller
     {
         $stamp = Stamp::findOrFail($intStampId);
 
-        // Simple verification - check if edit code matches
-        if ($request->stp_edit_code !== $stamp->stp_edit_code) {
+        // Check if edit code matches
+        if ($request->stp_edit_code !== $stamp->stp_edit_code) 
+        {
             return redirect()->back()->with('toast_error', 'Incorrect edit code.');
         }
 
         $validator = Validator::make($request->all(), [
-            'stp_to' => 'required|string|max:100',
-            'stp_from' => 'required|string|max:100',
-            'stp_message' => 'required|string',
-            'stp_color' => 'required|string|in:sunrays,lime,blaze,hotpink,skyblue,white',
+            'stp_to'       => 'required|string|max:100',
+            'stp_from'     => 'required|string|max:100',
+            'stp_message'  => 'required|string',
+            'stp_color'    => 'required|string|in:sunrays,lime,blaze,hotpink,skyblue,white',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails()) 
+        {
             return redirect()->back()
                 ->withErrors($validator)
                 ->withInput();
@@ -102,7 +111,7 @@ class StampController extends Controller
     }
 
     /**
-     * Delete stamp
+     * Delete stamp (DELETE)
      */
     public function deleteStamp(Request $request, $intStampId)
     {
@@ -112,10 +121,11 @@ class StampController extends Controller
 
         $stamp = Stamp::findOrFail($intStampId);
 
-        if ($request->stp_edit_code !== $stamp->stp_edit_code) {
+        if ($request->stp_edit_code !== $stamp->stp_edit_code) 
+        {
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid delete code!'
+                'message' => 'Invalid delete code!',
             ]);
         }
 
@@ -123,7 +133,7 @@ class StampController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Stamp deleted successfully!'
+            'message' => 'Stamp deleted successfully!',
         ]);
     }
 
@@ -133,7 +143,7 @@ class StampController extends Controller
     public function loadMoreStamps(Request $request)
     {
         $intPage = $request->get('page', 1);
-        $arrStamps = Stamp::orderBy('created_at', 'desc')->paginate(10, ['*'], 'page', $intPage);
+        $arrStamps  = Stamp::orderBy('created_at', 'desc')->paginate(10, ['*'], 'page', $intPage);
 
         return response()->json([
             'stamps' => $arrStamps->items(),
