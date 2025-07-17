@@ -1,3 +1,10 @@
+<!-- ======================================================================
+SYSTEM NAME: STAMPede
+PURPOSE: UI for a single stamp card, to enable replication
+PROGRAMMER: Acelle Krislette L. Rosales
+COPYRIGHT: © 2025 ITD. All rights reserved.
+====================================================================== -->
+
 @php
     $strColorClass = match ($stamp->stp_color) {
         'sunrays' => 'bg-yellow-100 border-yellow-300',

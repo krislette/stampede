@@ -1,6 +1,6 @@
 <!-- ======================================================================
 SYSTEM NAME: STAMPede
-PURPOSE: Controller for stamp creation, display, and management
+PURPOSE: App containing the layout for the entire website.
 PROGRAMMER: Acelle Krislette L. Rosales
 COPYRIGHT: © 2025 ITD. All rights reserved.
 ====================================================================== -->

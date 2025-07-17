@@ -1,3 +1,10 @@
+<!-- ======================================================================
+SYSTEM NAME: STAMPede
+PURPOSE: UI/View for the wall where stamps are posted
+PROGRAMMER: Acelle Krislette L. Rosales
+COPYRIGHT: © 2025 ITD. All rights reserved.
+====================================================================== -->
+
 @extends('layouts.app')
 
 @section('title', 'STAMPede')
@@ -33,6 +40,7 @@
     </div>
 
     <script>
+        // Function to copy the edit/delete code to user's clipboard
         function copyCode() {
             const text = document.getElementById('editCode').innerText;
             navigator.clipboard.writeText(text)
@@ -40,6 +48,7 @@
                 .catch(() => showToast('Failed to copy code.', true));
         }
 
+        // Function to close a modal
         function closeModal() {
             document.getElementById('success-modal').style.display = 'none';
         }
@@ -89,12 +98,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Initializing components and monitoring variables
             let intCurrentPage = 1;
-            let currentDeleteId = null;
+            let intCurrentDeleteId = null;
             const btnLoadMore = document.getElementById('load-more-btn');
             const divLoading = document.getElementById('loading');
             const divStampsContainer = document.getElementById('stamps-container');
 
+            // Logic for if the load more button is present
             if (btnLoadMore) {
                 btnLoadMore.addEventListener('click', function () {
                     intCurrentPage++;
@@ -102,6 +113,7 @@
                 });
             }
 
+            // Function to enable the loading and showing of more stamps
             function loadMoreStamps() {
                 btnLoadMore.classList.add('hidden');
                 divLoading.classList.remove('hidden');
@@ -130,13 +142,17 @@
                     });
             }
 
-            function createStampHtml(stamp) {
-                const strColorClass = getColorClass(stamp.stp_color);
-                const stampDate = new Date(stamp.created_at);
+            /**
+             * Function to create stamp template HTML for creating more stamps
+             * @param {object} objStamp
+             */
+            function createStampHtml(objStamp) {
+                const strColorClass = getColorClass(objStamp.stp_color);
+                const stampDate = new Date(objStamp.created_at);
                 const strFormattedDate = `${String(stampDate.getMonth() + 1).padStart(2, '0')}/${String(stampDate.getDate()).padStart(2, '0')}`;
 
                 return `
-                    <div id="stamp-${stamp.stp_id}" class="flex flex-col p-4 transition-transform duration-200 transform bg-white border-2 shadow-md h-80 border-dost-dark hover:scale-105">
+                    <div id="stamp-${objStamp.stp_id}" class="flex flex-col p-4 transition-transform duration-200 transform bg-white border-2 shadow-md h-80 border-dost-dark hover:scale-105">
                         <!-- Header with network logo and date -->
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center">
@@ -151,30 +167,33 @@
                         <!-- To and From -->
                         <div class="mb-3">
                             <div class="text-xs font-semibold text-dost-dark">
-                                To: <span>${stamp.stp_to}</span>
+                                To: <span>${objStamp.stp_to}</span>
                             </div>
                             <div class="text-xs text-dost-dark">
-                                From: <span>${stamp.stp_from}</span>
+                                From: <span>${objStamp.stp_from}</span>
                             </div>
                         </div>
                         
                         <!-- Message Body -->
                         <div class="flex-1 mb-3 overflow-hidden">
-                            <div class="h-full p-3 text-sm leading-relaxed break-words border-2 text-dost-dark ${strColorClass} overflow-y-auto">${stamp.stp_message}</div>
+                            <div class="h-full p-3 text-sm leading-relaxed break-words border-2 text-dost-dark ${strColorClass} overflow-y-auto">${objStamp.stp_message}</div>
                         </div>
                         
                         <!-- Footer with Edit and Delete -->
                         <div class="flex items-center justify-between text-xs">
-                            <a href="/edit-stamp/${stamp.stp_id}" class="cursor-pointer text-dost-blue hover:underline">Edit</a>
-                            <button onclick="showDeleteModal(${stamp.stp_id})" class="cursor-pointer text-dost-dark hover:underline">Delete</button>
+                            <a href="/edit-stamp/${objStamp.stp_id}" class="cursor-pointer text-dost-blue hover:underline">Edit</a>
+                            <button onclick="showDeleteModal(${objStamp.stp_id})" class="cursor-pointer text-dost-dark hover:underline">Delete</button>
                         </div>
                     </div>
                 `;
             }
 
-            // Get Colors
-            function getColorClass(color) {
-                switch(color) {
+            /**
+             * Helper function for getting colors
+             * @param {string} strColor
+             */
+            function getColorClass(strColor) {
+                switch(strColor) {
                     case 'sunrays':
                         return 'bg-yellow-100 border-yellow-300';
                     case 'lime':
@@ -193,16 +212,22 @@
             }
         });
 
-        function showDeleteModal(stampId) {
-            currentDeleteId = stampId;
+        /**
+         * Helper function to show delete modal
+         * @param {int} stampId
+         */
+        function showDeleteModal(intStampId) {
+            intCurrentDeleteId = intStampId;
             document.getElementById('delete-code').value = '';
             document.getElementById('delete-modal').style.display = 'flex';
         }
 
+        // Function to collapse the delete modal
         function closeDeleteModal() {
             document.getElementById('delete-modal').style.display = 'none';
         }
 
+        // Helper function that handles delete submission
         function submitDelete() {
             const code = document.getElementById('delete-code').value;
             if (!code) {
@@ -226,7 +251,7 @@
             formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
             formData.append('stp_edit_code', code);
 
-            fetch(`/delete-stamp/${currentDeleteId}`, {
+            fetch(`/delete-stamp/${intCurrentDeleteId}`, {
                 method: 'POST',
                 body: formData
             })
@@ -249,7 +274,7 @@
                     showToast('Deleted successfully!', false);
                     
                     // Remove the stamp from DOM instead
-                    removeStampFromDOM(currentDeleteId);
+                    removeStampFromDOM(intCurrentDeleteId);
                 } else {
                     showToast(data.message || 'Failed to delete. Wrong code.', true);
                 }
@@ -267,8 +292,12 @@
             });
         }
 
-        function removeStampFromDOM(stampId) {
-            const stampElement = document.getElementById(`stamp-${stampId}`);
+        /**
+         * Helper function to remove the stamp from DOM after deletion
+         * @param {int} intStampId
+         */
+        function removeStampFromDOM(intStampId) {
+            const stampElement = document.getElementById(`stamp-${intStampId}`);
             if (stampElement) {
                 stampElement.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
                 stampElement.style.opacity = '0';

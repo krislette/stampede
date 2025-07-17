@@ -1,9 +1,17 @@
+<!-- ======================================================================
+SYSTEM NAME: STAMPede
+PURPOSE: UI/View for the 'create' page of STAMPede
+PROGRAMMER: Acelle Krislette L. Rosales
+COPYRIGHT: © 2025 ITD. All rights reserved.
+====================================================================== -->
+
 @extends('layouts.app')
 
 @section('title', 'STAMPede: Create')
 
 @section('content')
 <div class="max-w-4xl mx-auto">
+    <!-- Header -->
     <div class="mb-6 text-center">
         <h2 class="mb-1 text-3xl font-bold text-dost-dark">CREATE <span class="text-dost-blue">STAMP</span></h2>
         <p class="text-gray-600">Write it. Post it. Let the people see it.</p>
@@ -15,6 +23,7 @@
             <form method="POST" action="{{ route('store-stamp') }}">
                 @csrf
 
+                <!-- To block -->
                 <div class="mb-4">
                     <label for="stp_to" class="block mb-2 text-sm font-medium text-dost-dark">To:</label>
                     <input type="text" 
@@ -29,6 +38,7 @@
                     @enderror
                 </div>
 
+                <!-- From block -->
                 <div class="mb-4">
                     <label for="stp_from" class="block mb-2 text-sm font-medium text-dost-dark">From:</label>
                     <input type="text" 
@@ -61,7 +71,7 @@
                     </div>
                 </div>
 
-                <!-- Color Section -->
+                <!-- Color section -->
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-dost-dark">Stamp Color:</label>
                     <div class="grid grid-cols-3 gap-2">
@@ -125,6 +135,7 @@
                     @enderror
                 </div>
 
+                <!-- Bottom buttons -->
                 <div class="flex justify-between">
                     <a href="{{ route('wall') }}" 
                         class="px-6 py-2 transition text-dost-dark hover:text-dost-blue">
@@ -178,88 +189,93 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const inputTo = document.getElementById('stp_to');
-    const inputFrom = document.getElementById('stp_from');
-    const inputMessage = document.getElementById('stp_message');
-    const radioColors = document.querySelectorAll('input[name="stp_color"]');
-    const charCount = document.getElementById('char-count');
-    
-    const previewTo = document.getElementById('preview-to');
-    const previewFrom = document.getElementById('preview-from');
-    const previewMessage = document.getElementById('preview-message');
-
-    // Update date in MM/DD format
-    function updateDate() {
-        const now = new Date();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        document.getElementById('preview-date').textContent = `${month}/${day}`;
-    }
-
-    // Update character count
-    function updateCharCount() {
-        const count = inputMessage.value.length;
-        charCount.textContent = `${count}/150 characters`;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initializing input fields & radio buttons
+        const inputTo = document.getElementById('stp_to');
+        const inputFrom = document.getElementById('stp_from');
+        const inputMessage = document.getElementById('stp_message');
+        const radioColors = document.querySelectorAll('input[name="stp_color"]');
+        const charCount = document.getElementById('char-count');
         
-        if (count > 140) {
-            charCount.classList.add('text-red-500');
-            charCount.classList.remove('text-gray-500');
-        } else {
-            charCount.classList.add('text-gray-500');
-            charCount.classList.remove('text-red-500');
+        const previewTo = document.getElementById('preview-to');
+        const previewFrom = document.getElementById('preview-from');
+        const previewMessage = document.getElementById('preview-message');
+
+        // Update date in MM/DD format
+        function updateDate() {
+            const now = new Date();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            document.getElementById('preview-date').textContent = `${month}/${day}`;
         }
-    }
 
-    // Update preview on input changes
-    inputTo.addEventListener('input', function() {
-        previewTo.textContent = this.value || 'Someone';
-    });
+        // Update character count on UI
+        function updateCharCount() {
+            const count = inputMessage.value.length;
+            charCount.textContent = `${count}/150 characters`;
+            
+            if (count > 140) {
+                charCount.classList.add('text-red-500');
+                charCount.classList.remove('text-gray-500');
+            } else {
+                charCount.classList.add('text-gray-500');
+                charCount.classList.remove('text-red-500');
+            }
+        }
 
-    inputFrom.addEventListener('input', function() {
-        previewFrom.textContent = this.value || 'You';
-    });
+        // Update preview on input changes
+        inputTo.addEventListener('input', function() {
+            previewTo.textContent = this.value || 'Someone';
+        });
 
-    inputMessage.addEventListener('input', function() {
-        previewMessage.textContent = this.value || 'Your message will appear here...';
+        inputFrom.addEventListener('input', function() {
+            previewFrom.textContent = this.value || 'You';
+        });
+
+        inputMessage.addEventListener('input', function() {
+            previewMessage.textContent = this.value || 'Your message will appear here...';
+            updateCharCount();
+        });
+
+        radioColors.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updatePreviewColor(this.value);
+            });
+        });
+
+        /**
+         * Update the preview color based on user choice
+         * @param {string} strColor
+         */
+        function updatePreviewColor(strColor) {
+            previewMessage.className = 'p-4 leading-relaxed text-dost-dark break-words border-2';
+            
+            switch(strColor) {
+                case 'sunrays':
+                    previewMessage.classList.add('bg-yellow-100', 'border-yellow-300');
+                    break;
+                case 'lime':
+                    previewMessage.classList.add('bg-lime-100', 'border-lime-300');
+                    break;
+                case 'blaze':
+                    previewMessage.classList.add('bg-orange-100', 'border-orange-300');
+                    break;
+                case 'hotpink':
+                    previewMessage.classList.add('bg-pink-100', 'border-pink-300');
+                    break;
+                case 'skyblue':
+                    previewMessage.classList.add('bg-sky-100', 'border-sky-300');
+                    break;
+                case 'white':
+                    previewMessage.classList.add('bg-white', 'border-gray-300');
+                    break;
+            }
+        }
+
+        // Initialize preview with default values
+        updatePreviewColor('sunrays');
+        updateDate();
         updateCharCount();
     });
-
-    radioColors.forEach(radio => {
-        radio.addEventListener('change', function() {
-            updatePreviewColor(this.value);
-        });
-    });
-
-    function updatePreviewColor(strColor) {
-        previewMessage.className = 'p-4 leading-relaxed text-dost-dark break-words border-2';
-        
-        switch(strColor) {
-            case 'sunrays':
-                previewMessage.classList.add('bg-yellow-100', 'border-yellow-300');
-                break;
-            case 'lime':
-                previewMessage.classList.add('bg-lime-100', 'border-lime-300');
-                break;
-            case 'blaze':
-                previewMessage.classList.add('bg-orange-100', 'border-orange-300');
-                break;
-            case 'hotpink':
-                previewMessage.classList.add('bg-pink-100', 'border-pink-300');
-                break;
-            case 'skyblue':
-                previewMessage.classList.add('bg-sky-100', 'border-sky-300');
-                break;
-            case 'white':
-                previewMessage.classList.add('bg-white', 'border-gray-300');
-                break;
-        }
-    }
-
-    // Initialize preview with default values
-    updatePreviewColor('sunrays');
-    updateDate();
-    updateCharCount();
-});
 </script>
 @endsection
