@@ -5,24 +5,30 @@
 @if (session('success'))
     <!-- Success Modal -->
     <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="max-w-md p-6 font-mono bg-white rounded-lg w-mx-4">
-            <div class="mb-4 text-green-800">
+        <div class="w-full max-w-md p-6 mx-4 font-mono bg-white border border-black">
+            <div class="mb-4 font-bold text-center text-dost-blue">
                 <strong>{{ session('success') }}</strong>
             </div>
+
             @if (session('edit_code'))
                 <div class="mb-4 text-sm">
-                    Your stamp edit/delete code is:
-                    <div class="px-2 py-1 mt-2 font-mono bg-gray-100 border rounded select-all" id="editCode">
-                        {{ session('edit_code') }}
+                    <div class="mb-1">Your stamp edit/delete code is:</div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex-1 px-2 py-2 bg-gray-100 border border-gray-400 select-all" id="editCode">
+                            {{ session('edit_code') }}
+                        </div>
+                        <button onclick="copyCode()" class="px-3 py-2 text-sm border border-dost-blue text-dost-blue hover:bg-dost-blue hover:text-dost-light">
+                            Copy
+                        </button>
                     </div>
-                    <button onclick="copyCode()" class="px-4 py-2 mt-2 text-white bg-blue-600 rounded hover:bg-blue-700">
-                        Copy Code
-                    </button>
                 </div>
             @endif
-            <button onclick="closeModal()" class="px-4 py-2 text-white bg-gray-600 rounded hover:bg-gray-700">
-                Close
-            </button>
+
+            <div class="flex justify-center">
+                <button onclick="closeModal()" class="px-4 py-2 border border-dost-dark text-dost-dark hover:bg-dost-dark hover:text-dost-light">
+                    Close
+                </button>
+            </div>
         </div>
     </div>
 
@@ -30,15 +36,39 @@
         function copyCode() {
             const text = document.getElementById('editCode').innerText;
             navigator.clipboard.writeText(text)
-                .then(() => alert('Code copied!'))
-                .catch(() => alert('Failed to copy code.'));
+                .then(() => showToast('Copied successfully!'))
+                .catch(() => showToast('Failed to copy code.', true));
         }
-        
+
         function closeModal() {
             document.getElementById('success-modal').style.display = 'none';
         }
     </script>
 @endif
+
+<!-- Toast Notification -->
+<div id="toast" class="fixed flex items-center gap-2 px-4 py-3 text-sm transition-opacity duration-300 opacity-0 z-[9999] bottom-5 right-5 border">
+    <span id="toast-message">Message</span>
+</div>
+
+<!-- Delete Modal -->
+<div id="delete-modal" class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-50">
+    <div class="w-full max-w-md p-6 mx-4 font-mono bg-white border border-black">
+        <div class="mb-4 text-sm text-dost-dark">
+            Please enter the edit/delete code to confirm deletion:
+        </div>
+        <input id="delete-code" type="text" class="w-full px-2 py-2 mb-4 border border-gray-400 focus:outline-none" placeholder="Enter code" />
+
+        <div class="flex justify-between">
+            <button onclick="closeDeleteModal()" class="px-4 py-2 border text-dost-dark border-dost-dark hover:bg-dost-dark hover:text-dost-light">
+                Cancel
+            </button>
+            <button onclick="submitDelete()" class="px-4 py-2 border text-dost-blue border-dost-blue hover:bg-dost-blue hover:text-dost-light">
+                Delete
+            </button>
+        </div>
+    </div>
+</div>
 
 @section('content')
     <div class="max-w-full">
@@ -63,8 +93,33 @@
     </div>
 
     <script>
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const messageEl = document.getElementById('toast-message');
+
+            messageEl.textContent = message;
+
+            // Reset all classes
+            toast.classList.remove('bg-dost-blue', 'border-dost-blue', 'bg-dost-dark', 'border-dost-dark', 'text-dost-light', 'text-dost-blue');
+
+            if (isError) {
+                toast.classList.add('bg-dost-dark', 'border-dost-dark', 'text-dost-light');
+            } else {
+                toast.classList.add('bg-dost-blue', 'border-dost-blue', 'text-dost-light'); // or text-white
+            }
+
+            toast.classList.remove('opacity-0');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0');
+            }, 3000);
+        }
+        
         document.addEventListener('DOMContentLoaded', function () {
             let intCurrentPage = 1;
+            let currentDeleteId = null;
             const btnLoadMore = document.getElementById('load-more-btn');
             const divLoading = document.getElementById('loading');
             const divStampsContainer = document.getElementById('stamps-container');
@@ -111,7 +166,7 @@
                 const strFormattedDate = `${String(stampDate.getMonth() + 1).padStart(2, '0')}/${String(stampDate.getDate()).padStart(2, '0')}`;
 
                 return `
-                    <div class="flex flex-col p-4 transition-transform duration-200 transform bg-white border-2 shadow-md h-80 border-dost-dark hover:scale-105">
+                    <div id="stamp-${stamp.stp_id}" class="flex flex-col p-4 transition-transform duration-200 transform bg-white border-2 shadow-md h-80 border-dost-dark hover:scale-105">
                         <!-- Header with network logo and date -->
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center">
@@ -147,7 +202,7 @@
                 `;
             }
 
-            // Also update your getColorClass function to match the new colors:
+            // Get Colors
             function getColorClass(color) {
                 switch(color) {
                     case 'sunrays':
@@ -168,28 +223,91 @@
             }
         });
 
-        function showDeleteModal(intStampId) {
-            const strCode = prompt('Enter the edit code to delete this stamp:');
-            if (strCode) {
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = `/delete-stamp/${intStampId}`;
+        function showDeleteModal(stampId) {
+            currentDeleteId = stampId;
+            document.getElementById('delete-code').value = '';
+            document.getElementById('delete-modal').style.display = 'flex';
+        }
 
-                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                const csrfInput = document.createElement('input');
-                csrfInput.type = 'hidden';
-                csrfInput.name = '_token';
-                csrfInput.value = csrfToken;
+        function closeDeleteModal() {
+            document.getElementById('delete-modal').style.display = 'none';
+        }
 
-                const codeInput = document.createElement('input');
-                codeInput.type = 'hidden';
-                codeInput.name = 'stp_edit_code';
-                codeInput.value = strCode;
+        function submitDelete() {
+            const code = document.getElementById('delete-code').value;
+            if (!code) {
+                showToast('Please enter a code.', true);
+                return;
+            }
 
-                form.appendChild(csrfInput);
-                form.appendChild(codeInput);
-                document.body.appendChild(form);
-                form.submit();
+            // Disable buttons and show loading state
+            const cancelBtn = document.querySelector('#delete-modal button[onclick="closeDeleteModal()"]');
+            const sendBtn = document.querySelector('#delete-modal button[onclick="submitDelete()"]');
+            
+            cancelBtn.disabled = true;
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Deleting...';
+            
+            // Add visual disabled state
+            cancelBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            sendBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+            const formData = new FormData();
+            formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+            formData.append('stp_edit_code', code);
+
+            fetch(`/delete-stamp/${currentDeleteId}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return res.json();
+            })
+            .then(data => {
+                // Re-enable buttons first
+                cancelBtn.disabled = false;
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Delete';
+                cancelBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                sendBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                if (data.success) {
+                    closeDeleteModal();
+                    showToast('Deleted successfully!', false);
+                    
+                    // Remove the stamp from DOM instead
+                    removeStampFromDOM(currentDeleteId);
+                } else {
+                    showToast(data.message || 'Failed to delete. Wrong code.', true);
+                }
+            })
+            .catch(error => {
+                console.error('Delete error:', error);
+                // Re-enable buttons
+                cancelBtn.disabled = false;
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Delete';
+                cancelBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                sendBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                
+                showToast('An error occurred.', true);
+            });
+        }
+
+        function removeStampFromDOM(stampId) {
+            const stampElement = document.getElementById(`stamp-${stampId}`);
+            if (stampElement) {
+                stampElement.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                stampElement.style.opacity = '0';
+                stampElement.style.transform = 'scale(0.95)';
+                
+                // Remove the element after the animation
+                setTimeout(() => {
+                    stampElement.remove();
+                }, 300);
             }
         }
     </script>
