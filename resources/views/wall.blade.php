@@ -156,7 +156,7 @@ COPYRIGHT: © 2025 ITD. All rights reserved.
                         <!-- Header with network logo and date -->
                         <div class="flex items-center justify-between mb-3">
                             <div class="flex items-center">
-                                <div class="w-6 h-6 border-2 bg-dost-blue border-dost-dark">
+                                <div class="w-6 h-6 border-2 bg-dost-dark border-dost-dark">
                                     <div class="flex items-center justify-center w-full h-full text-xs font-bold text-white">ST</div>
                                 </div>
                                 <span class="ml-2 text-xs font-bold text-dost-dark">STAMPede</span>
